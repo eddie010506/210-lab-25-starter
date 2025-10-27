@@ -97,13 +97,39 @@ int main() {
     end = high_resolution_clock::now();
     insert_set_time = duration_cast<microseconds>(end - start).count();
 
-    cout << read_list_time<<endl;
-    cout << read_vector_time<<endl;
-    cout << read_set_time<<endl;
-    cout << sort_vector_time<<endl;
-    cout << sort_list_time<<endl;
-    cout << -1 <<endl;
+    //race 4 delete
+    // time Vector Delete
+    start = high_resolution_clock::now();
+    my_vector.erase(my_vector.begin() + my_vector.size() / 2);
+    end = high_resolution_clock::now();
+    delete_vector_time = duration_cast<microseconds>(end - start).count();
 
+    // time List Delete 
+    auto list_it_del = my_list.begin();
+    advance(list_it_del, my_list.size() / 2);
+    start = high_resolution_clock::now();
+    my_list.erase(list_it_del);
+    end = high_resolution_clock::now();
+    delete_list_time = duration_cast<microseconds>(end - start).count();
+
+    // time Set Delete
+    start = high_resolution_clock::now();
+    my_set.erase(test_value);
+    end = high_resolution_clock::now();
+    delete_set_time = duration_cast<microseconds>(end - start).count();
+
+
+
+    cout << left << setw(10) << "Operation"<< setw(10) << "Vector"<< setw(10) << "List"<< setw(10) << "Set" << endl;
+    cout << "----------------------------------------" << endl;
+
+    cout << left << setw(10) << "Read"<< setw(10) << read_vector_time<< setw(10) << read_list_time<< setw(10) << read_set_time << endl;
+
+    cout << left << setw(10) << "Sort"<< setw(10) << sort_vector_time<< setw(10) << sort_list_time<< setw(10) << -1 << endl;
+
+    cout << left << setw(10) << "Insert"<< setw(10) << insert_vector_time<< setw(10) << insert_list_time<< setw(10) << insert_set_time << endl;
+
+    cout << left << setw(10) << "Delete"<< setw(10) << delete_vector_time<< setw(10) << delete_list_time<< setw(10) << delete_set_time << endl;
     return 0;
 
 }
