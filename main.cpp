@@ -50,6 +50,7 @@ int main() {
 
     // reset file stream to beginning
     infile.clear();
+    infile.seekg(0, ios::beg);
 
     start = high_resolution_clock::now();
     while (getline(infile, line)) {
@@ -89,7 +90,7 @@ int main() {
     start = high_resolution_clock::now();
     my_list.insert(list_it, test_value);
     end = high_resolution_clock::now();
-    insert_list_time = duration_cast<microseconds>(end - start).count();
+    insert_list_time = duration_cast<microseconds>(end - start).count();// seems too small for microseconds shows 0 sometimes but work normal on nanoseconds
 
     // time Set Insert
     start = high_resolution_clock::now();
@@ -110,7 +111,8 @@ int main() {
     start = high_resolution_clock::now();
     my_list.erase(list_it_del);
     end = high_resolution_clock::now();
-    delete_list_time = duration_cast<microseconds>(end - start).count();
+    delete_list_time = duration_cast<microseconds>(end - start).count();// seems too small for microseconds shows 0 sometimes but work normal on nanoseconds
+
 
     // time Set Delete
     start = high_resolution_clock::now();
