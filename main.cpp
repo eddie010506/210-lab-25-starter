@@ -59,7 +59,53 @@ int main() {
     read_set_time = duration_cast<microseconds>(end - start).count();
 
     infile.close();
+    
+
+    //race 2 sorting
+    start = high_resolution_clock::now();
+    sort(my_vector.begin(), my_vector.end());
+    end = high_resolution_clock::now();
+    sort_vector_time = duration_cast<microseconds>(end - start).count();
+
+    // time List Sort
+    start = high_resolution_clock::now();
+    my_list.sort();
+    end = high_resolution_clock::now();
+    sort_list_time = duration_cast<microseconds>(end - start).count();
+
+    //set is already sorted
+    // race 3 insert
+    const string test_value = "TEST";
+
+    // time Vector Insert
+    start = high_resolution_clock::now();
+    my_vector.insert(my_vector.begin() + my_vector.size() / 2, test_value);
+    end = high_resolution_clock::now();
+    insert_vector_time = duration_cast<microseconds>(end - start).count();
+
+    // time List Insert 
+    auto list_it = my_list.begin();
+    advance(list_it, my_list.size() / 2);
+    start = high_resolution_clock::now();
+    my_list.insert(list_it, test_value);
+    end = high_resolution_clock::now();
+    insert_list_time = duration_cast<microseconds>(end - start).count();
+
+    // time Set Insert
+    start = high_resolution_clock::now();
+    my_set.insert(test_value);
+    end = high_resolution_clock::now();
+    insert_set_time = duration_cast<microseconds>(end - start).count();
+
+    cout << read_list_time<<endl;
+    cout << read_vector_time<<endl;
+    cout << read_set_time<<endl;
+    cout << sort_vector_time<<endl;
+    cout << sort_list_time<<endl;
+    cout << -1 <<endl;
+
     return 0;
+
 }
 
 /* syntax examples:
